@@ -99,7 +99,8 @@ public class TaxiPathExporter {
 					String[] locations = sourceAsMap.get(Constants.TAXI_LOCATION).toString().split(",");
 					sb.append(tempid).append(" ").append(sourceAsMap.get(Constants.TAXI_DIRECTION)).append(" ")
 							.append(locations[0]).append(" ").append(locations[1]).append(" ")
-							.append(sourceAsMap.get(Constants.TAXI_TIME).toString());
+							.append(sourceAsMap.get(Constants.TAXI_TIME).toString()).append(" ")
+							.append(sourceAsMap.get(Constants.TAXI_SPEED).toString());
 					try {
 						bws.get(tempid).write(sb.toString());
 						bws.get(tempid).newLine();

@@ -38,7 +38,7 @@ public class TaxiDAO {
 					.setCorners(top, left, bottom, right);
 			QueryBuilder qb = QueryBuilders.boolQuery().must(geoqb).must(rqb);
 			String[] includeFields = new String[] { Constants.TAXI_ID, Constants.TAXI_LOCATION,
-					Constants.TAXI_DIRECTION, Constants.TAXI_TIME };
+					Constants.TAXI_DIRECTION, Constants.TAXI_TIME, Constants.TAXI_SPEED };
 			SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(qb).size(10000)
 //					.timeout(new TimeValue(Constants.TIMEOUT, TimeUnit.SECONDS))
 					.fetchSource(includeFields, null).sort(Constants.TAXI_TIME, SortOrder.ASC);

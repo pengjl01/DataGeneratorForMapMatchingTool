@@ -21,7 +21,7 @@ import org.opengis.feature.simple.SimpleFeatureType;
 
 //对接es导出数据
 public class SaveShape {
-	public static double MIN_MOVE_RATE = 0.85;
+	public static double MIN_MOVE_RATE = 0.7;
 
 	public void SavePoints(String filePath, List<String[]> pointData) {
 		try {
@@ -41,7 +41,7 @@ public class SaveShape {
 			tb.add("longitude", Double.class);
 			tb.add("latitude", Double.class);
 			tb.add("direction", Integer.class);
-//            tb.add("distance", Double.class);	
+			tb.add("speed", Double.class);
 			int count = 0;
 			for (int i = 1; i < pointData.size(); i++) {
 				String[] split = pointData.get(i);
@@ -73,12 +73,14 @@ public class SaveShape {
 					Integer direction = Integer.valueOf(split[1]);
 					double[] gps84 = PointTrans.gcj02_To_Gps84(longitude, latitude);
 					Coordinate pp = new Coordinate(gps84[0], gps84[1]);
+					Double speed = Double.valueOf(split[4]);
 					feature.setAttribute("the_geom", new GeometryFactory().createPoint(pp));
 					feature.setAttribute("id", id);
 					feature.setAttribute("time", time);
 					feature.setAttribute("longitude", longitude);
 					feature.setAttribute("latitude", latitude);
 					feature.setAttribute("direction", direction);
+					feature.setAttribute("speed", speed);
 				}
 				writer.write();
 				writer.close();

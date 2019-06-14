@@ -32,7 +32,7 @@ import org.locationtech.jts.io.WKTReader;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 
-//对接2009数据
+//对接自写测试数据
 public class SaveShapetest {
 	static public void SavePoints(String output, List<String[]> pointData) {
 		try {

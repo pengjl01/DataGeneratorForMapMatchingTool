@@ -21,7 +21,7 @@ import tools.SaveShape;
  * @version 创建时间：2019年5月8日 下午9:35:21
  * 将轨迹数据进行切分，间隔10分钟以上的两个点将被截开成2段轨迹
  */
-public class TraceSlice {
+public class TXT2SHPTraceSlice {
 	public static long threshold = 600000;// 间隔10分钟截断
 	public static int mintracesize = 100;// 轨迹至少含100个点
 

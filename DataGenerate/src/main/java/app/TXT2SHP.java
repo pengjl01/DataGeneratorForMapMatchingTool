@@ -20,8 +20,8 @@ public class TXT2SHP {
 		// D:\study\研究生\毕业论文\data\DataGenerate
 		String path = "D:\\study\\研究生\\毕业论文\\data\\DataGenerate\\";
 //		String path="D:\\study\\研究生\\毕业论文\\李亚光\\output\\";
-		String input = "mytxtdata1\\";
-		String output = "myshpdata2\\";
+		String input = "mytxtdata\\";
+		String output = "myshpdata\\";
 		File[] filelist = new File(path + input).listFiles();
 		for (File file : filelist) {
 			String shapepath = path + output + file.getName().replaceAll("[.][^.]+$", "") + ".shp";
