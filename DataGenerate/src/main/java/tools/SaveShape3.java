@@ -48,7 +48,7 @@ public class SaveShape3 {
 			tb.add("time", String.class);
 			tb.add("longitude", Double.class);
 			tb.add("latitude", Double.class);
-			tb.add("direction", Double.class);
+			tb.add("direction", Integer.class);
 			ShapefileDataStore ds = (ShapefileDataStore) new ShapefileDataStoreFactory().createNewDataStore(params);
 			ds.createSchema(tb.buildFeatureType());
 			ds.setCharset(Charset.forName("UTF-8"));
@@ -74,11 +74,11 @@ public class SaveShape3 {
 				if (i == 0) {
 					prepoint = pp;
 					pp = new Coordinate(Double.valueOf(pointData.get(1)[3]), Double.valueOf(pointData.get(1)[2]));
-					Double direction = calcDirection(prepoint, pp);
+					Integer direction = (int) (calcDirection(prepoint, pp) * 180 / Math.PI);
 					feature.setAttribute("direction", direction);
 					System.out.println(direction);
 				} else {
-					Double direction = calcDirection(prepoint, pp);
+					Integer direction = (int) (calcDirection(prepoint, pp) * 180 / Math.PI);
 					feature.setAttribute("direction", direction);
 					prepoint = pp;
 					System.out.println(direction);

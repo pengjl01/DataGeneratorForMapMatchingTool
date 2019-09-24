@@ -21,7 +21,7 @@ import org.opengis.feature.simple.SimpleFeatureType;
 
 //对接es导出数据
 public class SaveShape {
-	public static double MIN_MOVE_RATE = 0.7;
+	public static double MIN_MOVE_RATE = 0.7;// 最低变动率
 
 	public void SavePoints(String filePath, List<String[]> pointData) {
 		try {
@@ -42,6 +42,7 @@ public class SaveShape {
 			tb.add("latitude", Double.class);
 			tb.add("direction", Integer.class);
 			tb.add("speed", Double.class);
+			tb.add("index", Integer.class);
 			int count = 0;
 			for (int i = 1; i < pointData.size(); i++) {
 				String[] split = pointData.get(i);
@@ -54,7 +55,7 @@ public class SaveShape {
 					count += 1;
 			}
 			double moveRate = (double) count / pointData.size();
-//			变动率大于85%
+//			变动率判定
 			if (moveRate > MIN_MOVE_RATE) {
 //				System.out.println(filePath + "包含超过" + count + "个位移，已保留" + " 共包含" + pointData.size() + "个gps点");
 				ShapefileDataStore ds = (ShapefileDataStore) new ShapefileDataStoreFactory().createNewDataStore(params);
@@ -73,7 +74,7 @@ public class SaveShape {
 					Integer direction = Integer.valueOf(split[1]);
 					double[] gps84 = PointTrans.gcj02_To_Gps84(longitude, latitude);
 					Coordinate pp = new Coordinate(gps84[0], gps84[1]);
-					Double speed = Double.valueOf(split[4]);
+					Double speed = Double.valueOf(split[5]);
 					feature.setAttribute("the_geom", new GeometryFactory().createPoint(pp));
 					feature.setAttribute("id", id);
 					feature.setAttribute("time", time);
@@ -81,6 +82,7 @@ public class SaveShape {
 					feature.setAttribute("latitude", latitude);
 					feature.setAttribute("direction", direction);
 					feature.setAttribute("speed", speed);
+					feature.setAttribute("index", i + 1);
 				}
 				writer.write();
 				writer.close();
